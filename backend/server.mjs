@@ -11,13 +11,12 @@ import taskRoutes from "./routes/taskRouter.mjs";
 //Connecting MongoDB
 connectToDB()
 const app = express();
-const port = 5000;
 
 app.use(
     cors({
         origin: ['http://localhost:5174',
             'http://localhost:5173',
-            'https://employee-management-dashboard-eta.vercel.app',
+            'https://hackathon-six-steel.vercel.app/login',
 
         ],
         methods: ['GET', 'PUT', 'POST', 'DELETE'],
@@ -38,6 +37,7 @@ app.use("/", (req, res, next) => {
     console.log("Request URL:", req.url, "method: ", req.method);
     next();
 });
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
     console.log(`Example app listening on port http://localhost:${port}`)
