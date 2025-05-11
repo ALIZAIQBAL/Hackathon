@@ -31,11 +31,12 @@ const DraggableTask = ({ task, children }) => {
 
   return (
     <div ref={setNodeRef} style={style}>
+      {/* ✅ Drag Handle only */}
       <div
         {...listeners}
         {...attributes}
-        className="w-6 h-6 mb-3 bg-gradient-to-r from-blue-500 via-blue-400 to-blue-600 rounded-full cursor-grab shadow-md"
-        title="Drag task"
+        className="w-5 h-5 mb-2 bg-gradient-to-r from-pink-600 via-orange-400 to-purple-500 rounded-full cursor-grab"
+        title="Drag this task"
       />
       {children}
     </div>
@@ -50,9 +51,9 @@ const DroppableColumn = ({ status, children }) => {
   return (
     <div
       ref={setNodeRef}
-      className="flex-1 min-w-[300px] bg-white rounded-2xl shadow-lg border p-5 border-gray-100"
+      className="flex-1 bg-white rounded-2xl shadow-lg border p-5 border-gray-100"
     >
-      <h2 className="text-2xl font-bold text-gray-700 mb-4 border-b-2 pb-2 border-gradient-to-r from-blue-500 via-blue-400 to-blue-600">
+      <h2 className="text-xl font-bold text-gray-700 mb-4 border-b-2 pb-2 border-gradient-to-r from-pink-500 via-orange-400 to-purple-600">
         {status}
       </h2>
       {children}
@@ -108,19 +109,18 @@ const TaskBoard = ({ tasks }) => {
               {getTasksByStatus(status).map((task) => (
                 <DraggableTask key={task._id} task={task}>
                   <div
-                    className="bg-white p-5 rounded-xl shadow-md border border-transparent hover:shadow-lg transition-all duration-300"
+                    className="bg-gray-50 p-4 rounded-xl border border-transparent shadow hover:shadow-md transition duration-300"
                     style={{
                       borderImage:
-                        "linear-gradient(to right, #3b82f6, #60a5fa, #93c5fd) 1",
+                        "linear-gradient(to right, #ec4899, #f97316, #8b5cf6) 1",
                       borderStyle: "solid",
                       borderWidth: "1px",
                     }}
                   >
-                    <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                    <h3 className="font-semibold text-gray-800 mb-1">
                       {task.title}
                     </h3>
                     <p className="text-sm text-gray-600">{task.description}</p>
-
                     <div className="flex flex-wrap justify-end gap-2 mt-4">
                       <EditDialog task={task} />
                       <DeleteAlertDialog id={task._id} />
@@ -131,15 +131,6 @@ const TaskBoard = ({ tasks }) => {
                             key={s}
                             variant="outlined"
                             size="small"
-                            sx={{
-                              textTransform: "none",
-                              color: "#3b82f6",
-                              borderColor: "#3b82f6",
-                              "&:hover": {
-                                backgroundColor: "#3b82f615",
-                                borderColor: "#3b82f6",
-                              },
-                            }}
                             onClick={() => handleMove(task, s)}
                           >
                             Move to {s}
